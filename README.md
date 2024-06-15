@@ -166,7 +166,11 @@ Looking purely at RMSprop, it acts as a form of adapting the learning rate , whe
 >
 >*This exponentially weighted average, for a given $\theta$ is computed through the following equation:*
 >
-> $E[\tilde{g}_t^2] = (\beta * E[\tilde{g}_{t - 1}^2]) + (1 - \beta) * g_t^2$<br>
+> $$
+> E[\tilde{g}_t^2] = (\beta * E[\tilde{g}_{t - 1}^2]) + (1 - \beta) * g_t^2$<br>
+> $$
+>
+> 
 >
 > *where $\tilde{g}_t^2$ (or $\tilde{\frac{∂L(\theta)}{∂\theta}}_t$) is the exponentially weighted squared gradient at iteration $t$ and $g_t$ (or $\frac{∂L(\theta)}{∂\theta}$) is the gradient at iteration $t$.*
 >
