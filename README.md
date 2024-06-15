@@ -162,39 +162,24 @@ Essentially, this is what the optimzation algorithms, RMSprop, Adam, and AdaMax 
 
 Looking purely at RMSprop, it acts as a form of adapting the learning rate , where the learning rate, $\alpha$, decreases as the exponentially weighted average of the gradients squared, gets larger.
 
->*In essence, the bigger your gradients are, the smaller $\alpha$ becomes.*
+>*In essence, the bigger your gradients are, the smaller $\alpha$ becomes.* <br>
 >
 >*This exponentially weighted average, for a given $\theta$ is computed through the following equation:*
 >
-```math
-\tilde{g}_t^2 = (\beta * \tilde{g}_{t - 1}^2) + (1 - \beta) * g_t^2$
-```
+> $E[\tilde{g}_t^2] = (\beta * E[\tilde{g}_{t - 1}^2]) + (1 - \beta) * g_t^2$<br>
 >
-> 
+> *where $\tilde{g}_t^2$ (or $\tilde{\frac{∂L(\theta)}{∂\theta}}_t$) is the exponentially weighted squared gradient at iteration $t$ and $g_t$ (or $\frac{∂L(\theta)}{∂\theta}$) is the gradient at iteration $t$.*
 >
-> *where 
-```math
-\tilde{g}_t^2
-```
-is the exponentially weighted squared gradient at iteration t and $g_t$ is the gradient at iteration $t$.
+>*The computation of the exponentially weighted average is used to scale the learning rate as, $\frac{\alpha}{\sqrt{E[\tilde{g}_t^2]}}$, which then fits into the weight update as:*
 >
->*The computation of the exponentially weighted average is used to scale the learning rate as, 
-
-```math
-\frac{\alpha}{\sqrt{\tilde{g}_t^2}}
-```
-which then fits into the weight update as:*
+>$\theta = \theta - \frac{\alpha}{\sqrt{E[\tilde{g}_t^2]}} * \frac{∂L{\theta}}{∂\theta}$
 >
-```math
-\theta = \theta - \frac{\alpha}{\sqrt{E[\tilde{g}_t^2]}} * \frac{∂L{\theta}}{∂\theta}
-```
-
->*Again, as $\sqrt{\tilde{g}_t^2}$ gets bigger, $\alpha$ becomes smaller, then reducing the size of the training step.*
+>*Again, as $\sqrt{E[\tilde{g}_t^2]}$ gets bigger, $\alpha$ becomes smaller, then reducing the size of the training step.*
 
 
 Adding this adpative term to the learning rate, reduces the vertical oscillations, particularly in the regions where we saw more vertical oscillation.
 
-This is as in those regions, the earlier stasges of training, our gradient was larger, therefore the $\tilde{g}_t$ grows larger, then the learning rate, $\alpha$, decreases in magnitude.
+This is as in those regions, the earlier stasges of training, our gradient was larger, therefore the $E[\tilde{g}_t]$ grows larger, then the learning rate, $\alpha$, decreases in magnitude.
 
 
 This small improvement was able to bump up the training accuracy by about ~1.2% to about an estimated $99.9999999$ in a mere 250 epochs or 2500 training steps.
@@ -209,17 +194,17 @@ Adam, makes use of the  adaptive learning rate, jsut as RMSprop does, but with a
 
 Just as prior, it computes the exponentially weighted averages of the squared gradients:
 
-$\tilde{g}_t^2 = (\beta \cdot \tilde{g}_{t - 1}) + (1 - \beta) * g_t^2$
+$E[\tilde{g}_t^2] = (\beta * \tilde{g}_{t - 1}) + (1 - \beta) * g_t^2$<br>
 
 > *This is known as the second moment*
 
 but then also computes the exponentially weighted averages of the gradients (non-squared):
 
-$\tilde{g}_t = (\beta \cdot \tilde{g}_{t - 1}) + (1 - \beta) * g_t$
+$E[\tilde{g}_t] = (\beta * E[\tilde{g}_{t - 1}]) + (1 - \beta) * g_t$<br>
 
 >*This is known as the first moment*
 
-This *first moment, $\tilde{g}_t$*, is then used to replace the original gradient in the weight update at a current iteration step $t$, which adds the effect of momentum.
+This *first moment, $E[\tilde{g}_t]$*, is then used to replace the original gradient in the weight update at a current iteration step $t$, which adds the effect of momentum.
 
 In essence, the first moment accumulates and averages the magnitudes of the past gradients along with the magnitude of the gradient at current iteration step, $t.$ 
 
@@ -237,7 +222,7 @@ Ultimately, then Adam, the first moment in combination with the second moment, s
 
 AdaMax, should then also provide a similar effect, given that it builds on the concept of Adam, but rather, for the *second moment*, than taking the exponentially weighted averages of gradient $g_t^2$, it takes the exponentially weighted averages of a gradient, $g_t$ raised to the $pth$ power, where $p$ is equivalent to iteration $t$.
 
-$v_t = \beta_2(v_{t-1}) + (1 - \beta_2)(\frac{∂J(\theta)}{∂\theta})^2$
+$v_t = \beta_2(v_{t-1} + (1 - \beta_2)(\frac{∂J(\theta)}{∂\theta})^2$
 
 Empirically, both AdaMax and Adam acheived faster results than a vanilla network, both nearing $99.99999$% accuracy as seen in the prior section in a lower amount of epochs.
 
