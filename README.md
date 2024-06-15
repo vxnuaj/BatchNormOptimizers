@@ -162,11 +162,11 @@ Essentially, this is what the optimzation algorithms, RMSprop, Adam, and AdaMax 
 
 Looking purely at RMSprop, it acts as a form of adapting the learning rate , where the learning rate, $\alpha$, decreases as the exponentially weighted average of the gradients squared, gets larger.
 
->*In essence, the bigger your gradients are, the smaller $\alpha$ becomes.* <br>
+>*In essence, the bigger your gradients are, the smaller $\alpha$ becomes.*
 >
 >*This exponentially weighted average, for a given $\theta$ is computed through the following equation:*
 >
-> $\tilde{g}_t^2 = (\beta * \tilde{g}_{t - 1}^2) + (1 - \beta) * g_t^2$<br>
+> $\tilde{g}_t^2 = (\beta * \tilde{g}_{t - 1}^2) + (1 - \beta) * g_t^2$
 >
 > 
 >
@@ -196,13 +196,13 @@ Adam, makes use of the  adaptive learning rate, jsut as RMSprop does, but with a
 
 Just as prior, it computes the exponentially weighted averages of the squared gradients:
 
-$\tilde{g}_t^2 = (\beta \cdot \tilde{g}_{t - 1}) + (1 - \beta) * g_t^2$<br>
+$\tilde{g}_t^2 = (\beta \cdot \tilde{g}_{t - 1}) + (1 - \beta) * g_t^2$
 
 > *This is known as the second moment*
 
 but then also computes the exponentially weighted averages of the gradients (non-squared):
 
-$\tilde{g}_t = (\beta \cdot \tilde{g}_{t - 1}) + (1 - \beta) * g_t$<br>
+$\tilde{g}_t = (\beta \cdot \tilde{g}_{t - 1}) + (1 - \beta) * g_t$
 
 >*This is known as the first moment*
 
