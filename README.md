@@ -172,12 +172,23 @@ Looking purely at RMSprop, it acts as a form of adapting the learning rate , whe
 >
 > 
 >
-> *where $\tilde{g}_t^2$ (or $\tilde{\frac{∂L(\theta)}{∂\theta}}_t$) is the exponentially weighted squared gradient at iteration $t$ and $g_t$ (or $\frac{∂L(\theta)}{∂\theta}$) is the gradient at iteration $t$.*
+> *where 
+```math
+$\tilde{g}_t^2$ (or $\tilde{\frac{∂L(\theta)}{∂\theta}}_t$)
+```
+is the exponentially weighted squared gradient at iteration t and $g_t$ is the gradient at iteration $t$.
 >
->*The computation of the exponentially weighted average is used to scale the learning rate as, $\frac{\alpha}{\sqrt{\tilde{g}_t^2}}$, which then fits into the weight update as:*
+>*The computation of the exponentially weighted average is used to scale the learning rate as, 
+
+```math
+$\frac{\alpha}{\sqrt{\tilde{g}_t^2}}$
+```
+which then fits into the weight update as:*
 >
->$\theta = \theta - \frac{\alpha}{\sqrt{E[\tilde{g}_t^2]}} * \frac{∂L{\theta}}{∂\theta}$
->
+```math
+$\theta = \theta - \frac{\alpha}{\sqrt{E[\tilde{g}_t^2]}} * \frac{∂L{\theta}}{∂\theta}$
+```
+
 >*Again, as $\sqrt{\tilde{g}_t^2}$ gets bigger, $\alpha$ becomes smaller, then reducing the size of the training step.*
 
 
