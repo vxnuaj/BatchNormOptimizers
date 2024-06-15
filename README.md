@@ -196,13 +196,13 @@ Adam, makes use of the  adaptive learning rate, jsut as RMSprop does, but with a
 
 Just as prior, it computes the exponentially weighted averages of the squared gradients:
 
-$\tilde{g}_t^2 = (\beta * \tilde{g}_{t - 1}) + (1 - \beta) * g_t^2$<br>
+$\tilde{g}_t^2 = (\beta \cdot \tilde{g}_{t - 1}) + (1 - \beta) * g_t^2$<br>
 
 > *This is known as the second moment*
 
 but then also computes the exponentially weighted averages of the gradients (non-squared):
 
-$\tilde{g}_t = (\beta * \tilde{g}_{t - 1}) + (1 - \beta) * g_t$<br>
+$\tilde{g}_t = (\beta \cdot \tilde{g}_{t - 1}) + (1 - \beta) * g_t$<br>
 
 >*This is known as the first moment*
 
