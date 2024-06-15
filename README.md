@@ -16,7 +16,7 @@ Each model was run for either **250 or 500 epochs**, therefore each model was ru
 
 `BatchNormNN.py` is a Minibatched model wtih no batchnorm, again on a neural network trained on FashionMNIST with 10 minibataches, each sample totaling to 6k samples each.
 
-> _More details under their corresponding sections_
+> _More details under their corresponding sections_<br><br>
 > *Set `np.random.default_rng(seed = 1)` for reproducible results*
 >
 
